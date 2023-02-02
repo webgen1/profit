@@ -1,2 +1,2 @@
-# ProFit | Front-End (React)
-Front-End part of web-app.
+# ProFit | Back-End (Express)
+Back-End part of web-app.
