@@ -1,5 +1,5 @@
 import { prisma } from './prisma.js'
-import { UserFields } from '../auth/user.utils.js/user.utils.js'
+import { UserFields } from '../auth/utils/user/user-fields.js'
 import asyncHandler from 'express-async-handler'
 
 // @desc    Get user profile
@@ -9,7 +9,7 @@ import asyncHandler from 'express-async-handler'
 export const getUserProfile = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: 1
+      id: req.user.id
     },
     select: UserFields
   })
