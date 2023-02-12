@@ -1,4 +1,4 @@
-import { prisma } from './prisma.js'
+import { prisma } from '../prisma.js'
 import { UserFields } from '../auth/utils/user/user-fields.js'
 import asyncHandler from 'express-async-handler'
 

@@ -3,9 +3,11 @@ import dotenv from 'dotenv'
 import authRoutes from './app/auth/auth.routes.js'
 import userRoutes from './app/user/user.routes.js'
 import exerciseRoutes from './app/exercises/exercise.routes.js'
+import workoutRoutes from './app/workout/workout.routes.js'
+
 import morgan from 'morgan'
 import path from 'path'
-import { prisma } from './app/auth/prisma.js'
+import { prisma } from './app/prisma.js'
 import {
   errorHandler,
   notFound
@@ -28,8 +30,8 @@ async function main() {
 
   app.use('/api/auth', authRoutes)
   app.use('/api/users', userRoutes)
-  app.use('/api/create-exercise', exerciseRoutes)
   app.use('/api/exercises', exerciseRoutes)
+  app.use('/api/workouts', workoutRoutes)
 
   app.use(notFound)
   app.use(errorHandler)

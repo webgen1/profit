@@ -1,7 +1,7 @@
+import { prisma } from '../../prisma.js'
 import asyncHandler from 'express-async-handler'
-import { prisma } from '../prisma.js'
-import { UserFields } from '../utils/user/user-fields.js'
 import { validateToken } from '../utils/tokens/validate-token.js'
+import { UserFields } from '../utils/user/user-fields.js'
 
 export const protect = asyncHandler(async (req, res, next) => {
   let token
