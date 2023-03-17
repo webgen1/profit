@@ -4,12 +4,18 @@ import { faker } from '@faker-js/faker'
 import { hash, verify } from 'argon2'
 import { generateToken } from './utils/tokens/generate-token.js'
 import { UserFields } from './utils/user/user-fields.js'
+import { checkFieldsExistence } from './middleware/error.middleware.js'
 
 // @desc    Register user
 // @route   Post/api/auth/register
 // @access Public
 export const registerUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
+
+  if (!checkFieldsExistence({ email, password })) {
+    res.status(400)
+    throw new Error('Не все поля заполнены!')
+  }
 
   const isHaveUser = await prisma.user.findUnique({
     where: {
@@ -32,6 +38,11 @@ export const registerUser = asyncHandler(async (req, res) => {
     select: UserFields
   })
 
+  if (!email || !password) {
+    res.status(400)
+    throw new Error('Не все поля заполнены!')
+  }
+
   const token = generateToken(user.id)
 
   res.json({ user, token })
@@ -43,6 +54,11 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
+
+  if (!checkFieldsExistence({ email, password })) {
+    res.status(400)
+    throw new Error('Не все поля заполнены!')
+  }
 
   const user = await prisma.user.findUnique({
     where: {

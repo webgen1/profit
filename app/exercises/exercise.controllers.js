@@ -14,7 +14,7 @@ export const getExercise = asyncHandler(async (req, res) => {
   res.json(exercises)
 })
 
-// @desc    Create nex exercise
+// @desc    Create new exercise
 // @route   Post/api/exercises
 // @access  Private
 export const createNewExercise = asyncHandler(async (req, res) => {
